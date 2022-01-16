@@ -16,5 +16,9 @@ const pizzaList = [
 
 //user-interface logic
 $(document).ready(function() {
-  
+  for (let i = 1; i < 7; i++) {
+    $("menu-item-" + i).click(function() {
+      
+    });
+  }
 });
