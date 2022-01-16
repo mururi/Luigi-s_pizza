@@ -16,9 +16,9 @@ const pizzaList = [
 
 //user-interface logic
 $(document).ready(function() {
-  for (let i = 1; i < 7; i++) {
-    $("menu-item-" + i).click(function() {
-      $(".modal-title").text(pizzaList[i-1].name);
-    });
-  }
+  $("#menu-item-1").click(function() {
+     $("#pizza-type").text(pizzaList[0].name);
+     $(".modal-img").attr("src", "assets/img/" + pizzaList[0].image);
+  });
+  
 });
