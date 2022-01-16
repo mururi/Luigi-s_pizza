@@ -18,7 +18,7 @@ const pizzaList = [
 $(document).ready(function() {
   for (let i = 1; i < 7; i++) {
     $("menu-item-" + i).click(function() {
-      
+      $(".modal-title").text(pizzaList[i-1].name);
     });
   }
 });
