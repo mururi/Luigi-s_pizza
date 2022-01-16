@@ -15,3 +15,6 @@ const pizzaList = [
 
 
 //user-interface logic
+$(document).ready(function() {
+  
+});
