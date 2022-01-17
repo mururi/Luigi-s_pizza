@@ -62,12 +62,14 @@ const toppingsList = [
 ];
 
 let cartItem = [];
+let selectedToppings = [];
 
 //user-interface logic
 $(document).ready(function() {
   let selectedSize;
   let selectedType;
   let typeCost;
+  let toppingCost = 0;
   for(let i = 1; i < 7; i++) {
     $("#menu-item-" + i).click(function() {
       $("#pizza-type").text(pizzaList[i - 1].name);
@@ -91,6 +93,22 @@ $(document).ready(function() {
         $("#total-price").text(typeCost + crustCost);
       });
       
+      //let toppingsChecked = false;
+      $("input[type=checkbox]").change(function() {
+        if ($(this).prop("checked")) {
+          checkedTopping = $(this).val();
+          selectedToppings.push(toppingsList[checkedTopping]);
+          //toppingCost = toppingsList[checkedTopping].price;
+          toppingCost = 0;
+        }
+
+        selectedToppings.forEach(function(selectedTopping) {
+          toppingCost = toppingCost + selectedTopping.price;
+          
+        });
+        console.log(toppingCost);
+      });
+
     });
     
   }
