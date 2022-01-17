@@ -64,6 +64,11 @@ h2 {
   height: auto;
 }
 
+/* offcanvas styling */
+h5#cartLabel {
+  color: black;
+}
+
 /* about us styling */
 #about-us {
   background-image: url("../assets/img/about-us-bg.png");
