@@ -76,12 +76,13 @@ $(document).ready(function() {
       typeCost = priceByTypeList[i - 1][selectedSize];
       selectedType = pizzaList[i - 1].name;
       $("#total-price").text(typeCost);
+      $("input[name=sizeRadio]").change(function() {
+        selectedSize = $(this).val();
+        let typeCost = priceByTypeList[i - 1][selectedSize];
+        $("#total-price").text(typeCost);
+      });
     });
-    $("input[name=sizeRadio]:checked").change(function() {
-      selectedSize = $(this).val();
-      let typeCost = priceByTypeList[i - 1][selectedSize];
-      $("#total-price").text(typeCost);
-    });
+    
   }
   
   
