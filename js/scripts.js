@@ -65,16 +65,23 @@ let cartItem = [];
 
 //user-interface logic
 $(document).ready(function() {
+  let selectedSize;
+  let selectedType;
+  let typeCost;
   for(let i = 1; i < 7; i++) {
     $("#menu-item-" + i).click(function() {
       $("#pizza-type").text(pizzaList[i - 1].name);
       $(".modal-img").attr("src", "assets/img/" + pizzaList[i - 1].image);
-      let selectedSize = $("input[name=sizeRadio]:checked").val();
-      
-      let typeCost = priceByTypeList[i - 1][selectedSize];
-      //console.log(priceByTypeList[i - 1][selectedSize]);
+      selectedSize = $("input[name=sizeRadio]:checked").val();
+      typeCost = priceByTypeList[i - 1][selectedSize];
+      selectedType = pizzaList[i - 1].name;
       $("#total-price").text(typeCost);
-   });
+    });
+    $("input[name=sizeRadio]:checked").change(function() {
+      selectedSize = $(this).val();
+      let typeCost = priceByTypeList[i - 1][selectedSize];
+      $("#total-price").text(typeCost);
+    });
   }
   
   
