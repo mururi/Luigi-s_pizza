@@ -70,6 +70,10 @@ $(document).ready(function() {
       $("#pizza-type").text(pizzaList[i - 1].name);
       $(".modal-img").attr("src", "assets/img/" + pizzaList[i - 1].image);
       let selectedSize = $("input[name=sizeRadio]:checked").val();
+      
+      let typeCost = priceByTypeList[i - 1][selectedSize];
+      //console.log(priceByTypeList[i - 1][selectedSize]);
+      $("#total-price").text(typeCost);
    });
   }
   
