@@ -65,7 +65,7 @@ h2 {
 }
 
 /* offcanvas styling */
-h5#cartLabel {
+h5#cartLabel, h6, p#orderSummary, #blackText {
   color: black;
 }
 

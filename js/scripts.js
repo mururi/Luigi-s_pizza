@@ -144,11 +144,26 @@ $(document).ready(function() {
         cartItems.push(cartObject);
         console.log(cartItems);
       });
-      
-      //cartItems.push(new CartItem())
     });
     
   }
+  //end of for loop
+  $("#cartButton").click(function(){
+    if (cartItems.length === 0) {
+      $("#orderSummary").html('<p id="blackText" class="lead text-center">Your Cart is Empty</p>');
+    } else {
+      cartItems.forEach(function(item){
+        $("#orderSummary").html(`<p id="blackText">Pizza Type: ${item.name}</p>
+                                  <p id="blackText">Pizza Size: ${item.size}</p>
+                                  <p id="blackText">Pizza Crust: ${item.crust}</p>
+                                  <p id="blackText">Quantity: ${item.quantity}</p>
+                                  <p id="blackText">Total Cost: ${item.totalCost}</p>
+        `);
+      });
+    }
+    
+    
+  });
   
   
 });

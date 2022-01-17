@@ -42,7 +42,7 @@
               <li class="nav-item mx-4 fs-5">
                 <!-- cart button -->
                 <button class="btn" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
-                aria-controls="cartOffcanvas"><i class="bi bi-cart3"></i></button>
+                aria-controls="cartOffcanvas" id="cartButton"><i class="bi bi-cart3"></i></button>
               </li>
             </ul>
           </div>
@@ -291,7 +291,7 @@
           <div>
             <h3>Ksh. <span id="total-price"></span></h3>
           </div>
-          <button type="button" class="btn buttons" id="addToCart">Add to Cart</button>
+          <button type="button" class="btn buttons" id="addToCart" data-bs-dismiss="modal">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -305,7 +305,10 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      ...
+      <h6 class="text-center">Your Order Summary</h6>
+      <div id="orderSummary">
+        
+      </div>
     </div>
   </div>
 
