@@ -21,6 +21,16 @@ function Sizes(name, large, medium, small) {
   this.small = small;
 }
 
+function CartItem(name, size, crust, toppings, quantity, totalCost) {
+  this.name = name;
+  this.size = size;
+  this.crust = crust;
+  this.toppings = toppings;
+  this.quantity = quantity;
+  this.totalCost = totalCost;
+}
+
+
 const pizzaList = [
   new PizzaType("Chicken Mushroom", "pizza-chicken-mushroom.jpg"),
   new PizzaType("Pepperoni", "pizza-pepperoni.jpg"),
@@ -61,54 +71,81 @@ const toppingsList = [
   new Topping("Peri-peri sauce",100),
 ];
 
-let cartItem = [];
-let selectedToppings = [];
+let cartItems = [];
 
 //user-interface logic
 $(document).ready(function() {
-  let selectedSize;
-  let selectedType;
-  let typeCost;
-  let toppingCost = 0;
+  
+
   for(let i = 1; i < 7; i++) {
     $("#menu-item-" + i).click(function() {
+      let selectedSize;
+      let selectedType;
+      let selectedCrust;
+      let typeCost;
+      let crustCost;
+      let toppingCost = 0;
+      let quantity;
+      let selectedToppings = [];
+
+      //set corresponding image and title on modal
       $("#pizza-type").text(pizzaList[i - 1].name);
       $(".modal-img").attr("src", "assets/img/" + pizzaList[i - 1].image);
+      
       selectedSize = $("input[name=sizeRadio]:checked").val();
       typeCost = priceByTypeList[i - 1][selectedSize];
       selectedType = pizzaList[i - 1].name;
-      let selectedCrust = $("input[name=crustRadio]:checked").val();
-      let crustCost = crustList[selectedCrust].price;
-      $("#total-price").text(typeCost + crustCost);
+
+      selectedCrust = $("input[name=crustRadio]:checked").val();
+      crustCost = crustList[selectedCrust].price;
+
+      quantity = $("#quantity").val();
+
+      $("#total-price").text((typeCost + crustCost + toppingCost) * quantity);
+      
+      //check if the size changes
       $("input[name=sizeRadio]").change(function() {
         selectedSize = $(this).val();
         typeCost = priceByTypeList[i - 1][selectedSize];
-        $("#total-price").text(typeCost + crustCost);
+        $("#total-price").text((typeCost + crustCost + toppingCost) * quantity);
       });
       
-      
+      //check if the crust changes
       $("input[name=crustRadio]").change(function() {
         selectedCrust = $(this).val();
         crustCost = crustList[selectedCrust].price;
-        $("#total-price").text(typeCost + crustCost);
+        $("#total-price").text((typeCost + crustCost + toppingCost) * quantity);
       });
       
-      //let toppingsChecked = false;
+      //check if toppings have been added
       $("input[type=checkbox]").change(function() {
+        toppingCost = 0; //reset topping cost every time there's a change
         if ($(this).prop("checked")) {
           checkedTopping = $(this).val();
           selectedToppings.push(toppingsList[checkedTopping]);
-          //toppingCost = toppingsList[checkedTopping].price;
-          toppingCost = 0;
+          selectedToppings.forEach(function(selectedTopping) {
+            toppingCost = toppingCost + selectedTopping.price;  
+          });
         }
-
-        selectedToppings.forEach(function(selectedTopping) {
-          toppingCost = toppingCost + selectedTopping.price;
-          
-        });
-        console.log(toppingCost);
+        $("#total-price").text((typeCost + crustCost + toppingCost) * quantity);
+        
       });
 
+      //check if the quantity has changed
+      $("#quantity").change(function() {
+        quantity = $(this).val();
+        $("#total-price").text((typeCost + crustCost + toppingCost) * quantity);
+      });
+
+      //add item to cart
+      $("#addToCart").click(function() {
+        let totalCost = (typeCost + crustCost + toppingCost) * quantity;
+        let cartObject = new CartItem(selectedType, selectedSize, crustList[selectedCrust].name, selectedToppings, quantity, totalCost);
+        cartItems.push(cartObject);
+        console.log(cartItems);
+      });
+      
+      //cartItems.push(new CartItem())
     });
     
   }

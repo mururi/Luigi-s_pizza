@@ -266,15 +266,16 @@
         <!-- modal footer -->
         <div class="modal-footer justify-content-space-between">
           <div class="row mb-3">
+            <!-- quantity input -->
             <label for="quantity" class="col-sm-2 col-form-label">QTY</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" id="quantity" value="1">
+              <input type="number" class="form-control" id="quantity" min="1" value="1" step="1">
             </div>
           </div>
           <div>
             <h3>Ksh. <span id="total-price"></span></h3>
           </div>
-          <button type="button" class="btn buttons">Add to Cart</button>
+          <button type="button" class="btn buttons" id="addToCart">Add to Cart</button>
         </div>
       </div>
     </div>
