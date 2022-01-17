@@ -75,12 +75,22 @@ $(document).ready(function() {
       selectedSize = $("input[name=sizeRadio]:checked").val();
       typeCost = priceByTypeList[i - 1][selectedSize];
       selectedType = pizzaList[i - 1].name;
-      $("#total-price").text(typeCost);
+      let selectedCrust = $("input[name=crustRadio]:checked").val();
+      let crustCost = crustList[selectedCrust].price;
+      $("#total-price").text(typeCost + crustCost);
       $("input[name=sizeRadio]").change(function() {
         selectedSize = $(this).val();
-        let typeCost = priceByTypeList[i - 1][selectedSize];
-        $("#total-price").text(typeCost);
+        typeCost = priceByTypeList[i - 1][selectedSize];
+        $("#total-price").text(typeCost + crustCost);
       });
+      
+      
+      $("input[name=crustRadio]").change(function() {
+        selectedCrust = $(this).val();
+        crustCost = crustList[selectedCrust].price;
+        $("#total-price").text(typeCost + crustCost);
+      });
+      
     });
     
   }
